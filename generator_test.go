@@ -18,4 +18,9 @@ func TestGenerate(t *testing.T) {
 	if versionMarker&0xF0 != 7<<4 {
 		t.Errorf("Invalid UUID version marker: %#02x\n", versionMarker)
 	}
+
+	rfcMarker := uuid[8]
+	if rfcMarker&0xC0 != 2<<6 {
+		t.Errorf("Invalid RFC variant marker: %#02x\n", rfcMarker)
+	}
 }
