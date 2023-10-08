@@ -53,6 +53,10 @@ func Parse(source string) (UUID, error) {
 	return UUID(bytes), nil
 }
 
+func (u UUID) Dump() string {
+	return hex.EncodeToString(u)
+}
+
 func (u UUID) String() string {
 	return fmt.Sprintf("%s-%s-%s-%s-%s",
 		hex.EncodeToString(u[0:4]),
