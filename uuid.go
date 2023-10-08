@@ -18,6 +18,7 @@ func (u *UUID) Scan(src interface{}) error {
 	var source []byte
 	switch src.(type) {
 	case []byte:
+		fmt.Println(string(src.([]byte)))
 		source = src.([]byte)
 		if len(source) == 32 || len(source) == 36 {
 			uuid, err := Parse(string(source))
@@ -45,7 +46,7 @@ func Parse(source string) (UUID, error) {
 	if len(source) == 36 {
 		source = strings.ReplaceAll(source, "-", "")
 	}
-	bytes , err := hex.DecodeString(source)
+	bytes, err := hex.DecodeString(source)
 	if err != nil {
 		return uuid, errors.New("Invalid UUID hex")
 	}
