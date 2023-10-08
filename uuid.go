@@ -54,7 +54,7 @@ func Parse(source string) (UUID, error) {
 }
 
 func (u UUID) Dump() string {
-	return hex.EncodeToString(u)
+	return hex.EncodeToString(u[:])
 }
 
 func (u UUID) String() string {
