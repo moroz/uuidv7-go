@@ -59,3 +59,30 @@ func TestParseInvalidHex(t *testing.T) {
 		t.Errorf("Expected Parse to return null UUID, got: %v\n", parsed)
 	}
 }
+
+func TestScanStringWithHyphens(t *testing.T) {
+	str := "018b1492-8002-7338-bae4-adb32c1b949a"
+	var uuid uuidv7.UUID
+	err := uuid.Scan(str)
+	if err != nil {
+		t.Errorf("Expected Scan to succeed, got: %v", err)
+	}
+}
+
+func TestScanStringWithoutHyphens(t *testing.T) {
+	str := "018b149280027338bae4adb32c1b949a"
+	var uuid uuidv7.UUID
+	err := uuid.Scan(str)
+	if err != nil {
+		t.Errorf("Expected Scan to succeed, got: %v", err)
+	}
+}
+
+func TestScanBinary(t *testing.T) {
+	binary := []byte{0x1, 0x8B, 0x14, 0x9C, 0xBC, 0x35, 0x73, 0xA3, 0x81, 0xFF, 0x37, 0x7E, 0x35, 0xA6, 0x71, 0x6C}
+	var uuid uuidv7.UUID
+	err := uuid.Scan(binary)
+	if err != nil {
+		t.Errorf("Expected Scan to succeed, got: %v", err)
+	}
+}
