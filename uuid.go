@@ -15,25 +15,40 @@ func (u UUID) Value() (driver.Value, error) {
 }
 
 func (u *UUID) Scan(src interface{}) error {
-	var source []byte
-	switch src.(type) {
+	switch src := src.(type) {
+	case nil:
+		return nil
+
+	case string:
+		// return a null UUID when called with empty string
+		if src == "" {
+			return nil
+		}
+
+		parsed, err := Parse(src)
+		if err != nil {
+			return fmt.Errorf("Scan: %v", err)
+		}
+
+		*u = parsed
+
 	case []byte:
-		fmt.Println(string(src.([]byte)))
-		source = src.([]byte)
-		if len(source) == 32 || len(source) == 36 {
-			uuid, err := Parse(string(source))
-			if err != nil {
-				return err
-			}
-			*u = uuid
+		// return a null UUID when called with an empty slice
+		if len(src) == 0 {
 			return nil
 		}
-		if len(source) == 16 {
-			*u = UUID(source)
+
+		// If the length of the slice is 16 bytes, treat it as
+		// an existing UUID
+		if len(src) == 16 {
+			copy((*u)[:], src)
 			return nil
 		}
+
+		return u.Scan(string(src))
+
 	default:
-		return errors.New("Incompatible type for UUID")
+		return fmt.Errorf("Scan: unable to scan type %T into UUID", src)
 	}
 	return nil
 }
