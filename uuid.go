@@ -8,6 +8,8 @@ import (
 
 type UUID [16]byte
 
+var Nil = UUID{}
+
 func (u UUID) Value() (driver.Value, error) {
 	return driver.Value(u[:]), nil
 }
@@ -22,4 +24,8 @@ func (u UUID) String() string {
 		hex.EncodeToString(u[6:8]),
 		hex.EncodeToString(u[8:10]),
 		hex.EncodeToString(u[10:]))
+}
+
+func (u UUID) IsNil() bool {
+	return u == Nil
 }
