@@ -2,6 +2,7 @@ package uuidv7
 
 import (
 	"database/sql/driver"
+	"encoding/base64"
 	"encoding/hex"
 	"fmt"
 )
@@ -24,6 +25,10 @@ func (u UUID) String() string {
 		hex.EncodeToString(u[6:8]),
 		hex.EncodeToString(u[8:10]),
 		hex.EncodeToString(u[10:]))
+}
+
+func (u UUID) Base64() string {
+	return base64.StdEncoding.EncodeToString(u[:])
 }
 
 func (u UUID) IsNil() bool {

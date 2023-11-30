@@ -21,3 +21,13 @@ func TestUUIDIsNil(t *testing.T) {
 		t.Errorf("Empty UUID should be nil")
 	}
 }
+
+func TestUUIDBase64(t *testing.T) {
+	str := "018b1492-8002-7338-bae4-adb32c1b949a"
+	parsed, _ := uuidv7.Parse(str)
+	actual := parsed.Base64()
+	expected := "AYsUkoACczi65K2zLBuUmg=="
+	if actual != expected {
+		t.Errorf("Expected UUID %s to be encoded as %s, got %s", str, expected, actual)
+	}
+}
