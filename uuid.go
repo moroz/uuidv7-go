@@ -12,7 +12,7 @@ type UUID [16]byte
 var Nil = UUID{}
 
 func (u UUID) Value() (driver.Value, error) {
-	return driver.Value(u[:]), nil
+	return u.String(), nil
 }
 func (u UUID) Dump() string {
 	return hex.EncodeToString(u[:])
