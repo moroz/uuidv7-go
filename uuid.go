@@ -39,3 +39,18 @@ func (u UUID) IsNil() bool {
 func (u UUID) MarshalJSON() ([]byte, error) {
 	return json.Marshal(u.String())
 }
+
+func (u *UUID) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+
+	uuid, err := Parse(s)
+	if err != nil {
+		return err
+	}
+
+	*u = uuid
+	return nil
+}
