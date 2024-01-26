@@ -4,6 +4,7 @@ import (
 	"database/sql/driver"
 	"encoding/base64"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 )
 
@@ -33,4 +34,8 @@ func (u UUID) Base64() string {
 
 func (u UUID) IsNil() bool {
 	return u == Nil
+}
+
+func (u UUID) MarshalJSON() ([]byte, error) {
+	return json.Marshal(u.String())
 }
