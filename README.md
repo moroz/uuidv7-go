@@ -26,3 +26,7 @@ func main() {
 $ go run .
 018e0cd7-986e-7f77-a8b4-8d55de59c992
 ```
+
+## License
+
+BSD 3-Clause "New" or "Revised" License

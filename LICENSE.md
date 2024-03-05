@@ -1,4 +1,4 @@
-Copyright 2023 Karol Moroz <karol@moroz.dev>
+Copyright 2023-2024 Karol Moroz <karol@moroz.dev>
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
