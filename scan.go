@@ -2,6 +2,7 @@ package uuidv7
 
 import "fmt"
 
+// Scan implements the `sql.Scanner` interface.
 func (u *UUID) Scan(src interface{}) error {
 	switch src := src.(type) {
 	case nil:

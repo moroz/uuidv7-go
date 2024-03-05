@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Generate generates a UUIDv7 with the current timestamp.
 func Generate() UUID {
 	var uuid UUID
 
